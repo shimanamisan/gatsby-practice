@@ -1,7 +1,11 @@
 import * as React from "react"
+import { graphql } from "gatsby" // 追加
+import Img from "gatsby-image" // 追加
+
+import Layout from "../components/layout"
 
 // markup
-const IndexPage = () => {
+const IndexPage = ({ data }) => {
   return (
         <div>
           <meta charSet="UTF-8" />
@@ -10,31 +14,30 @@ const IndexPage = () => {
           <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossOrigin="anonymous" />
           <link rel="stylesheet" href="style.css" />
           <link rel="icon" href="/images/icon.png" type="image/png" />
-          <header className="header">
-            <div className="container">
-              <div className="site">
-                <a href="base-index.html">
-                  <img src="/images/logo.svg" alt="ESSENTIALS" />
-                </a>
-              </div>
-              <nav className="nav">
-                <ul>
-                  <li><a href="base-index.html">TOP</a></li>
-                  <li><a href="base-about.html">ABOUT</a></li>
-                </ul>
-              </nav>
-            </div>
-          </header>
+
+        {/* Layoutコンポーネントの内側の要素がプロパティとして渡される */}
+        <Layout>
+
           <section className="hero">
             <figure>
-              <img src="/images/hero.jpg" alt="" />
+              <Img fluid={data.hero.childImageSharp.fluid} alt="" style={{ height: "100%" }}/>
             </figure>
             <div className="catch">
               <h1>There is no love sincerer than<br /> the love of food.</h1>
               <p>食物を愛するよりも誠実な愛はない ― バーナード・ショー</p>
             </div>
             <div className="wave">
-              <img src="/images/wave.svg" alt="" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 1366 229.5"
+                fill="#fff"
+              >
+                <path
+                  d="M1369,6.3C1222.5-12.2,1189.5,8,919.2,96.6C665,179.8,160,141.7-2,53.1v150l1371-14.2V6.3z"
+                  opacity=".53"
+                />
+                <path d="M1369 229.5V55.8c-9.5-2.4-19.2-4.4-28.9-5.8-196.9-29.9-203.4-15.8-503.9 82.6-219.8 72-627.6 53.2-838.2-10.5v107.4h1371z" />
+              </svg>
             </div>
           </section>
           <section className="food">
@@ -42,16 +45,16 @@ const IndexPage = () => {
               <h2 className="bar">Food <span>Essence</span></h2>
               <div className="details">
                 <div className="detail">
-                  <figure>
-                    <img src="/images/fruit.jpg" alt="" />
-                  </figure>
+                <figure>
+                  <Img fluid={data.fruit.childImageSharp.fluid} alt="" />
+                </figure>
                   <h3>フルーツ</h3>
                   <p>FRUIT</p>
                   <p>甘くてすっぱくておいしい果実たち。<br />旬のフルーツを満喫します。</p>
                 </div>
                 <div className="detail">
                   <figure>
-                    <img src="/images/grain.jpg" alt="" />
+                    <Img fluid={data.grain.childImageSharp.fluid} alt="" />
                   </figure>
                   <h3>穀物</h3>
                   <p>GRAIN</p>
@@ -59,7 +62,7 @@ const IndexPage = () => {
                 </div>
                 <div className="detail">
                   <figure>
-                    <img src="/images/beverage.jpg" alt="" />
+                    <Img fluid={data.beverage.childImageSharp.fluid} alt="" />
                   </figure>
                   <h3>飲み物</h3>
                   <p>BEVERAGE</p>
@@ -71,41 +74,61 @@ const IndexPage = () => {
           <section className="photo">
             <h2 className="sr-only">Photo</h2>
             <figure>
-              <img src="/images/berry.jpg" alt="赤く熟したベリー" />
+              <Img fluid={data.berry.childImageSharp.fluid} alt="赤く熟したベリー" style={{ height: "100%" }}/>
             </figure>
           </section>
-          <footer className="footer">
-            <div className="container">
-              <div className="site">
-                <a href="base-index.html">
-                  <img src="/images/logo-w.svg" alt="ESSENTIALS" />
-                  <p>おいしい食材と食事を探求するサイト</p>
-                </a>
-              </div>
-              <ul className="sns">
-                <li>
-                  <a href="https://twitter.com/">
-                    <i className="fab fa-twitter" />
-                    <span className="sr-only">Twitter</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://facebook.com/">
-                    <i className="fab fa-facebook-square" />
-                    <span className="sr-only">Facebook</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="http://instagram.com/">
-                    <i className="fab fa-instagram" />
-                    <span className="sr-only">Instagram</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </footer>
+
+        </Layout>
+
         </div>
   )
 }
+
+export const query = graphql`
+  query {
+    hero: file(relativePath: {eq: "hero.jpg"}) {
+      childImageSharp {
+        fluid(maxWidth: 1600) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    fruit: file(relativePath: {eq: "fruit.jpg"}) {
+      childImageSharp {
+        fluid(maxWidth: 320) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    grain: file(relativePath: {eq: "grain.jpg"}) {
+      childImageSharp {
+        fluid(maxWidth: 320) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    beverage: file(relativePath: {eq: "beverage.jpg"}) {
+      childImageSharp {
+        fluid(maxWidth: 320) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    berry: file(relativePath: {eq: "berry.jpg"}) {
+      childImageSharp {
+        fluid(maxWidth: 1600) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+    pattern: file(relativePath: {eq: "pattern.jpg"}) {
+      childImageSharp {
+        fluid(maxWidth: 1920, quality: 90) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+  }
+`
 
 export default IndexPage
