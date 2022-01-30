@@ -3,7 +3,7 @@ module.exports = {
       title: `ESSENTIALS`,
       description: `美味しい食材と食事を探求するサイト`,
       lang: `ja`,
-      siteUrl: `http://localhost:8000`,
+      siteUrl: `https://optimistic-euler-682692.netlify.app`,
       locale: `ja_JP`,
     },
     plugins: [
