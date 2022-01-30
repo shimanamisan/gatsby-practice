@@ -3,21 +3,15 @@ import { graphql } from "gatsby" // 追加
 import Img from "gatsby-image" // 追加
 
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 
 // markup
 const IndexPage = ({ data }) => {
   return (
         <div>
-          <meta charSet="UTF-8" />
-          <meta name="viewport" content="width=device-width" />
-          <title>ESSENTIALS</title>
-          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossOrigin="anonymous" />
-          <link rel="stylesheet" href="style.css" />
-          <link rel="icon" href="/images/icon.png" type="image/png" />
-
         {/* Layoutコンポーネントの内側の要素がプロパティとして渡される */}
         <Layout>
-
+          <SEO/>
           <section className="hero">
             <figure>
               <Img fluid={data.hero.childImageSharp.fluid} alt="" style={{ height: "100%" }}/>
