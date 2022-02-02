@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
     siteMetadata: {
       title: `ESSENTIALS`,
@@ -7,6 +11,7 @@ module.exports = {
       locale: `ja_JP`,
     },
     plugins: [
+      `gatsby-plugin-image`, // v4系で画像を使用するために追加
       'gatsby-transformer-sharp',
       'gatsby-plugin-sharp',
       {
@@ -30,5 +35,13 @@ module.exports = {
         }
       },
       `gatsby-plugin-offline`,
+      {
+        resolve: `gatsby-source-contentful`,
+        options: {
+          spaceId: process.env.GATSBY_CONTENTFUL_SPACE_ID,
+          accessToken: process.env.GATSBY_CONTENTFUL_API_KEY,
+          host: process.env.CONTENTFUL_HOST
+        }
+      }
     ]
 }

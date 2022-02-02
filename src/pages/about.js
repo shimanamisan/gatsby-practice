@@ -1,9 +1,10 @@
 import * as React from "react"
 import { graphql } from "gatsby" // 追加
-import Img from "gatsby-image" // 追加
+// import Img from "gatsby-image" // 追加
+import { GatsbyImage } from "gatsby-plugin-image" // 追加
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUtensils, faCheckSquare } from "@fortawesome/free-solid-svg-icons"
@@ -15,7 +16,7 @@ const AboutPage = ({ data, location }) => {
 
           {/* Layoutコンポーネントの内側の要素がプロパティとして渡される */}
           <Layout>
-            <SEO
+            <Seo
                 pagetitle="ESSENTIALSについて"
                 pagedesc="食べ物について情報を発信しているサイトです"
                 pagepath={location.pathname}
@@ -27,7 +28,11 @@ const AboutPage = ({ data, location }) => {
             />
             <div className="eyecatch">
               <figure>
-                <Img fluid={data.about.childImageSharp.fluid} alt="ブルーベリー＆ヨーグルト" />
+                {/* <Img fluid={data.about.childImageSharp.fluid} alt="ブルーベリー＆ヨーグルト" /> */}
+                <GatsbyImage
+                  image={data.about.childImageSharp.gatsbyImageData}
+                  alt="ブルーベリー＆ヨーグルト"
+                />
               </figure>
             </div>
             <article className="content">
@@ -65,9 +70,7 @@ export const query = graphql`
   query {
     about: file(relativePath: {eq: "about.jpg"}) {
       childImageSharp {
-        fluid(maxWidth: 1600) {
-          ...GatsbyImageSharpFluid_withWebp
-        }
+        gatsbyImageData(layout: FULL_WIDTH)
         original {
           src
           height

@@ -1,7 +1,8 @@
 import React from "react"
 // ページコンポーネント以外で useStaticQuery を使用しないと駄目
 import { graphql, useStaticQuery } from "gatsby" // 追加
-import Img from "gatsby-image" // 追加
+// import Img from "gatsby-image" // 追加
+import { GatsbyImage } from "gatsby-plugin-image" // 追加
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTwitter, faFacebookSquare, faInstagram } from "@fortawesome/free-brands-svg-icons"
@@ -14,9 +15,7 @@ const Footer = () => {
         query{
             pattern: file(relativePath: {eq: "pattern.jpg"}) {
                     childImageSharp {
-                        fluid(maxWidth: 1920, quality: 90) {
-                        ...GatsbyImageSharpFluid_withWebp
-                        }
+                        gatsbyImageData(quality: 90, layout: FULL_WIDTH)
                     }
                 }
         }
@@ -58,7 +57,13 @@ const Footer = () => {
                 </ul>
             </div>
             <div className="back">
-                <Img fluid={data.pattern.childImageSharp.fluid} alt="" style={{ height: "100%" }}/>
+                {/* <Img fluid={data.pattern.childImageSharp.fluid} alt="" style={{ height: "100%" }}/> */}
+
+                <GatsbyImage
+                    image={data.pattern.childImageSharp.gatsbyImageData}
+                    alt=""
+                    style={{ height: "100%" }}
+                />
             </div>
         </footer>
     )
