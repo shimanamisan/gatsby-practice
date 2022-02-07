@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql } from "gatsby" // 追加
+import { graphql, Link } from "gatsby"// 追加
 import { GatsbyImage } from "gatsby-plugin-image" // 追加
 
 import Layout from "../components/layout"
@@ -97,6 +97,28 @@ const IndexPage = ({ data }) => {
             </figure>
           </section>
 
+          <section>
+            <div className="container">
+            <h2 className="sr-only">RECENT POSTS</h2>
+            <div className="posts">
+              {data.allContentfulBlogPost.edges.map(({ node }) => (
+                <article className="post" key={node.id}>
+                  <Link to={`/blog/post/${node.slug}/`}>
+                    <figure>
+                      <GatsbyImage
+                        image={node.eyecatch.gatsbyImageData}
+                        alt={node.eyecatch.description}
+                        style={{ height: "100%" }}
+                      />
+                    </figure>
+                    <h3>{node.title}</h3>
+                  </Link>
+                </article>
+              ))}
+            </div>
+            </div>
+          </section>
+
         </Layout>
 
         </div>
@@ -110,6 +132,25 @@ export const query = graphql`
         gatsbyImageData(layout: FULL_WIDTH)
       }
     }
+
+    allContentfulBlogPost(
+        sort: { order: DESC, fields: publishDate }
+        skip: 0
+        limit: 4
+    ) {
+        edges {
+            node {
+                title
+                id
+                slug
+                eyecatch {
+                gatsbyImageData(width: 573, layout: CONSTRAINED)
+                description
+                }
+            }
+        }
+    }
+
     fruit: file(relativePath: { eq: "fruit.jpg" }) {
       childImageSharp {
         gatsbyImageData(width: 320, layout: CONSTRAINED)
