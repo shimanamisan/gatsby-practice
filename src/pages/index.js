@@ -4,6 +4,7 @@ import { GatsbyImage } from "gatsby-plugin-image" // 追加
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import Image from '../components/image'
 
 // markup
 const IndexPage = ({ data }) => {
@@ -16,8 +17,9 @@ const IndexPage = ({ data }) => {
             <figure>
               {/* <Img fluid={data.hero.childImageSharp.fluid} alt="" style={{ height: "100%" }}/> */}
 
-              <GatsbyImage
-                image={data.hero.childImageSharp.gatsbyImageData}
+              {/* ppendix A */}
+              <Image
+                filename="hero.jpg"
                 alt=""
                 style={{ height: "100%" }}
               />
@@ -48,10 +50,17 @@ const IndexPage = ({ data }) => {
                 <figure>
                   {/* <Img fluid={data.fruit.childImageSharp.fluid} alt="" /> */}
 
-                  <GatsbyImage
+                  {/* <GatsbyImage
                     image={data.fruit.childImageSharp.gatsbyImageData}
                     alt=""
-                  />
+                  /> */}
+
+                {/* ppendix A */}
+                <Image
+                  filename="fruit.jpg"
+                  alt=""
+                  style={{ height: "100%" }}
+                />
 
                 </figure>
                   <h3>フルーツ</h3>
@@ -59,21 +68,34 @@ const IndexPage = ({ data }) => {
                   <p>甘くてすっぱくておいしい果実たち。<br />旬のフルーツを満喫します。</p>
                 </div>
                 <div className="detail">
-                  <figure>
-                    <GatsbyImage
-                      image={data.grain.childImageSharp.gatsbyImageData}
-                      alt=""
-                    />
-                  </figure>
+                <figure>
+                  {/* <GatsbyImage
+                    image={data.grain.childImageSharp.gatsbyImageData}
+                    alt=""
+                  /> */}
+                  {/* ppendix A */}
+                  <Image
+                    filename="grain.jpg"
+                    alt=""
+                    style={{ height: "100%" }}
+                  />
+                </figure>
                   <h3>穀物</h3>
                   <p>GRAIN</p>
                   <p>食事の基本となる穀物。<br />毎日の活動のエネルギー源になります。</p>
                 </div>
                 <div className="detail">
                   <figure>
-                    <GatsbyImage
+                    {/* <GatsbyImage
                       image={data.beverage.childImageSharp.gatsbyImageData}
                       alt=""
+                    /> */}
+
+                    {/* ppendix A */}
+                    <Image
+                      filename="beverage.jpg"
+                      alt=""
+                      style={{ height: "100%" }}
                     />
                   </figure>
                   <h3>飲み物</h3>
@@ -88,9 +110,16 @@ const IndexPage = ({ data }) => {
             <figure>
               {/* <Img fluid={data.berry.childImageSharp.fluid} alt="赤く熟したベリー" style={{ height: "100%" }}/> */}
 
-              <GatsbyImage
+              {/* <GatsbyImage
                 image={data.berry.childImageSharp.gatsbyImageData}
                 alt="赤く熟したベリー"
+                style={{ height: "100%" }}
+              /> */}
+
+              {/* ppendix A */}
+              <Image
+                filename="berry.jpg"
+                alt=""
                 style={{ height: "100%" }}
               />
 
@@ -127,12 +156,7 @@ const IndexPage = ({ data }) => {
 
 export const query = graphql`
   query {
-    hero: file(relativePath: { eq: "hero.jpg" }) {
-      childImageSharp {
-        gatsbyImageData(layout: FULL_WIDTH)
-      }
-    }
-
+ 
     allContentfulBlogPost(
         sort: { order: DESC, fields: publishDate }
         skip: 0
@@ -150,33 +174,47 @@ export const query = graphql`
             }
         }
     }
-
-    fruit: file(relativePath: { eq: "fruit.jpg" }) {
-      childImageSharp {
-        gatsbyImageData(width: 320, layout: CONSTRAINED)
-      }
-    }
-    grain: file(relativePath: { eq: "grain.jpg" }) {
-      childImageSharp {
-        gatsbyImageData(width: 320, layout: CONSTRAINED)
-      }
-    }
-    beverage: file(relativePath: { eq: "beverage.jpg" }) {
-      childImageSharp {
-        gatsbyImageData(width: 320, layout: CONSTRAINED)
-      }
-    }
-    berry: file(relativePath: { eq: "berry.jpg" }) {
-      childImageSharp {
-        gatsbyImageData(layout: FULL_WIDTH)
-      }
-    }
-    pattern: file(relativePath: { eq: "pattern.jpg" }) {
-      childImageSharp {
-        gatsbyImageData(quality: 90, layout: FULL_WIDTH)
-      }
-    }
   }
 `
+
+/*
+
+  [ppendix Aのセクションで削除したクエリ]
+  この設定では image.js のクエリの maxWidth の値を変えることができない
+  useStaticQuery ではクエリに変数を使うことができないという制限があるので、
+  必要に応じて処理を分けるなどの対応を考える必要がある
+
+  hero: file(relativePath: { eq: "hero.jpg" }) {
+    childImageSharp {
+      gatsbyImageData(layout: FULL_WIDTH)
+    }
+  }
+
+  fruit: file(relativePath: { eq: "fruit.jpg" }) {
+    childImageSharp {
+      gatsbyImageData(width: 320, layout: CONSTRAINED)
+    }
+  }
+  grain: file(relativePath: { eq: "grain.jpg" }) {
+    childImageSharp {
+      gatsbyImageData(width: 320, layout: CONSTRAINED)
+    }
+  }
+  beverage: file(relativePath: { eq: "beverage.jpg" }) {
+    childImageSharp {
+      gatsbyImageData(width: 320, layout: CONSTRAINED)
+    }
+  }
+  berry: file(relativePath: { eq: "berry.jpg" }) {
+    childImageSharp {
+      gatsbyImageData(layout: FULL_WIDTH)
+    }
+  }
+  pattern: file(relativePath: { eq: "pattern.jpg" }) {
+    childImageSharp {
+      gatsbyImageData(quality: 90, layout: FULL_WIDTH)
+    }
+  }
+*/
 
 export default IndexPage
