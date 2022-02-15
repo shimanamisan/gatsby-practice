@@ -42,6 +42,15 @@ module.exports = {
           accessToken: process.env.GATSBY_CONTENTFUL_API_KEY,
           host: process.env.CONTENTFUL_HOST
         }
+      },
+      {
+        resolve: `gatsby-plugin-google-analytics`,
+        options: {
+          trackingId: `UA-138230091-10`,
+          head: true, // タグを head要素内に追加するように指定
+          // respectDNT: true, // トラッキングを拒否しているユーザーのトラッキングを行わない
+          exclude: [`/cat/**`, `/test/`]
+        }
       }
     ]
 }

@@ -5096,6 +5096,15 @@ gatsby-page-utils@^2.5.2:
     lodash "^4.17.21"
     micromatch "^4.0.4"
 
+gatsby-plugin-google-analytics@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-analytics/-/gatsby-plugin-google-analytics-4.7.0.tgz#c68f187f57748bab220da0ab9f0f78a94793f692"
+  integrity sha512-LQN+Awf7WvodYKytBZFLL40B3PPk7TPHjPa7fDzlq7J9k+/MIXQ1aYAmxhVJN3WK//GdhrltrxPZVwgomaO5NA==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    minimatch "3.0.4"
+    web-vitals "^1.1.2"
+
 gatsby-plugin-image@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-image/-/gatsby-plugin-image-2.6.0.tgz#5342507be7fdd0109fc815c0f2906b0407a55e14"
@@ -10228,6 +10237,11 @@ weak-lru-cache@^1.0.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/weak-lru-cache/-/weak-lru-cache-1.2.1.tgz#6b4f2da7e1701f845e71522417f1df1e39503df8"
   integrity sha512-O5ag1F0Xk6ui+Fg5LlosTcVAyHs6DeyiDDbOapNtFCx/KjZ82B3U9stM9hvzbVclKWn9ABPjaINX/nQkGkJkKg==
+
+web-vitals@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-1.1.2.tgz#06535308168986096239aa84716e68b4c6ae6d1c"
+  integrity sha512-PFMKIY+bRSXlMxVAQ+m2aw9c/ioUYfDgrYot0YUa+/xa0sakubWhSDyxAKwzymvXVdF4CZI71g06W+mqhzu6ig==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
